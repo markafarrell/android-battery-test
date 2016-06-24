@@ -1,23 +1,30 @@
 Requires Eclipse for Android Developers and Android Studio
 
+
+Setup instructions:
+
+Clone to <PROJECT_DIRECTORY>
+
+Edit setup_environment_vars.bat and set:
+
+ - ANDROID_HOME
+ - JAVA_HOME
+ - ECLIPSE_HOME
+ - PROJECT_DIRECTORY
+ 
+corresponding to the correct locations for your environment.
+
 Build instructions:
 
-From inside the project directory:
+run build.bat
 
-<path_to_eclipse\plugins\org.apache.ant_1.9.6.v201510161327\bin\ant.bat build
+Install to device:
 
-Push to device:
-
-From <android_studio_directory>\sdk\platform-tools
-
-adb push "<project_directory>\bin\battery-test.jar" /data/local/tmp
+run install.bat
 
 Run Test:
 
-From <android_studio_directory>\sdk\platform-tools
-
-adb shell uiautomator runtest /data/local/tmp/battery-test.jar -c bom.maf.batterytest.BatteryTest
-
+run run.bat
 
 
 NOTE: To generate a new test project <android-sdk>/tools/android create uitest-project -n <name> -t  <target-id> -p <path>
