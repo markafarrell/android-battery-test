@@ -1,1 +1,24 @@
+Requires Eclipse for Android Developers and Android Studio
 
+Build instructions:
+
+From inside the project directory:
+
+<path_to_eclipse\plugins\org.apache.ant_1.9.6.v201510161327\bin\ant.bat build
+
+Push to device:
+
+From <android_studio_directory>\sdk\platform-tools
+
+adb push "<project_directory>\bin\battery-test.jar" /data/local/tmp
+
+Run Test:
+
+From <android_studio_directory>\sdk\platform-tools
+
+adb shell uiautomator runtest /data/local/tmp/battery-test.jar -c bom.maf.batterytest.BatteryTest
+
+
+
+NOTE: To generate a new test project <android-sdk>/tools/android create uitest-project -n <name> -t  <target-id> -p <path>
+Where <name> is the name of the project that was created to test UiAutomator (in our case: battery-test), <target-id> is the choice of device and Android API Level (you can get a list of installed devices, the team (<android-sdk> / tools / android list targets), and <path> is the path to the directory that contains the project.
