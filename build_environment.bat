@@ -1,0 +1,1 @@
+cmd /k setup_environment_vars.bat

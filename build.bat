@@ -1,0 +1,2 @@
+call setup_environment_vars.bat
+ant build
