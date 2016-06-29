@@ -8,6 +8,8 @@ import com.android.uiautomator.testrunner.UiAutomatorTestCase;
 
 public class BatteryTest extends UiAutomatorTestCase {
 	public void test() throws UiObjectNotFoundException {
+		
+		/*
 		// Default parameters
 		String toNumber = "0457760939"; 
 		String text = "Test message";
@@ -23,6 +25,26 @@ public class BatteryTest extends UiAutomatorTestCase {
 		findAndRunApp();
 	    	sendMessage(toNumber, text);
 	    	exitToMainWindow();
+	    */
+		try {
+			while(true) {
+				
+				//Get rid of it complaining about battery charging if it is there
+				try{
+					getUiDevice().pressHome();
+					UiObject okButton = new UiObject(new UiSelector()
+						.className("android.widget.Button").text("OK"));
+					okButton.click();
+				}
+				catch (Exception e)
+				{}
+				
+				startWebBrowser("www.ucla.edu");
+				Thread.sleep(120000);
+			}
+		} catch (InterruptedException e) {
+		        e.printStackTrace();
+		   }
 	}
 	// Here will be called for all other functions
 	private void findAndRunApp() throws UiObjectNotFoundException {
@@ -77,5 +99,31 @@ public class BatteryTest extends UiAutomatorTestCase {
 			getUiDevice().pressBack();
 			getUiDevice().pressBack();
 			getUiDevice().pressHome();
+	}
+
+	private void startWebBrowser(String path) throws UiObjectNotFoundException {
+		getUiDevice().pressHome();
+		sleep(100);
+		getUiDevice().pressHome();
+		UiObject webBrowserApp = new UiObject(new UiSelector().className("android.widget.TextView").text("Internet"));
+
+		webBrowserApp.clickAndWaitForNewWindow();
+
+		//UiObject locationBar = new UiObject(new UiSelector().className("android.widget.EditText").description("Search, or enter URL"));
+		//locationBar.setText(path);
+		
+		UiObject locationBar = new UiObject(new UiSelector().className("android.widget.EditText").resourceId("com.sec.android.app.sbrowser:id/sbrowser_url_bar"));
+		locationBar.setText(path);
+		
+		getUiDevice().pressEnter();
+		
+		sleep(5000);
+		
+		UiObject refreshButton = new UiObject(new UiSelector().className("android.widget.ImageButton").description("Refresh"));
+		refreshButton.click();
+		
+		sleep(5000);
+		
+		getUiDevice().pressHome();
 	}
 }
